@@ -1,0 +1,54 @@
+body {
+    font-family: Arial;
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .App {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    color: #DAA520;
+  }
+  
+  .albums-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .album {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .album img {
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  footer {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #222;
+    border-top: 2px solid #DAA520;
+  }
+  
+  @media (max-width: 1024px) {
+    .albums-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .albums-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
