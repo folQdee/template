@@ -1,44 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import './index.css';
+import { BandList } from './components/BandList';
+import { NewsBlock } from './components/NewsBlock';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { fetchBands, fetchNews } from './api/api';
 
-import dissentient from './images/dissentient.jpg';
-import angelmaker from './images/angelmaker.png';
-import sanctum from './images/sanctum.jpg';
-import decay from './images/decay.jpg';
+export type Band = {
+  id: number;
+  name: string;
+  genre: string;
+  country: string;
+  logoUrl: string;
+};
 
+export type NewsItem = {
+  id: string;
+  title: string;
+  url: string;
+  publishedAt: string;
+};
+
+/**
+ * Основной компонент приложения Metal Universe
+ * @component
+ */
 function App() {
+  const [bands, setBands] = useState<Band[]>([]);
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [bandsData, newsData] = await Promise.all([
+          fetchBands(),
+          fetchNews(),
+        ]);
+        setBands(bandsData);
+        setNews(newsData);
+      } catch (e) {
+        setError('Не удалось загрузить данные. Попробуйте позже.');
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
   return (
-    <div className="App">
-            <h1>AngelMaker</h1>
-            <p>
-                AngelMaker — канадская дэткор-группа, основанная в 2011 году. 
-                Известна своим мощным звучанием, агрессивными риффами и уникальными 
-                двойными вокалами.
-            </p>
-            
-            <h2>Альбомы</h2>
-            <div className="albums-grid"> 
-                <div className="album">
-                    <img src={decay} alt="Decay" />
-                    <p>Decay (2012)</p>
-                </div>
-                <div className="album">
-                    <img src={dissentient} alt="Dissentient" />
-                    <p>Dissentient (2015)</p>
-                </div>
-                <div className="album">
-                    <img src={angelmaker} alt="AngelMaker" />
-                    <p>AngelMaker (2019)</p>
-                </div>
-                <div className="album">
-                    <img src={sanctum} alt="Sanctum" />
-                    <p>Sanctum (2022)</p>
-                </div>
-            </div>
-            
-            <footer>
-                <p>&copy; 2025 AngelMaker Albums Page</p>
-            </footer>
-        </div>
+    <div className="container">
+      <Header />
+      <main>
+        {error && <p className="error">{error}</p>}
+        {loading ? (
+          <p className="loading">Загрузка...</p>
+        ) : (
+          <>
+            <BandList bands={bands} />
+            <NewsBlock news={news} />
+          </>
+        )}
+      </main>
+      <Footer />
+    </div>
   );
 }
 
