@@ -1,14 +1,13 @@
-import React from 'react';
+import React from "react";
+import Input from "./Input";
 
-/**
- * Шапка сайта
- * @component
- */
-export function Header() {
+function Header() {
   return (
-    <header>
-      <h1>Metal Universe</h1>
-      <p>Погрузиcь в мир тяжёлой музыки</p>
+    <header className="header">
+      <h1 className="header__title">Metal Music</h1>
+      <Input />
     </header>
   );
 }
+
+export default Header;
