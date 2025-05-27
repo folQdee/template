@@ -7,8 +7,9 @@ function Footer() {
       <p>
         Powered by{" "}
         <a href="https://itunes.apple.com/" target="_blank" rel="noopener noreferrer">
-          ссылка на iTunes ¯\_(ツ)_/¯
+          ссылка на iTunes
         </a>
+        <p>¯\_(ツ)_/¯</p>
       </p>
     </footer>
   );

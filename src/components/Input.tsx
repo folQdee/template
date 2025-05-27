@@ -36,7 +36,7 @@ function Input() {
     <input
       type="search"
       className="header__search"
-      placeholder="Найти песню или/и исполнителя"
+      placeholder="Найти песню"
       value={value}
       onChange={(e) => setValue(e.target.value)}
       onKeyDown={(e) => e.key === "Enter" && handleSearch()}

@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to right, #0f0f0f, #1f1f1f);
-  color: #eee;
+  color: #ffffff;
 }
 
 .container {
@@ -18,16 +18,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 3px solid #ff5050;
+  border-bottom: 3px solid #ff6060;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 2;
 }
 
 .header__title {
   margin: 0;
   font-size: 2.5rem;
-  color: #ff5050;
+  color: #f76565;
   text-shadow: 2px 2px 8px #330000;
 }
 
@@ -47,16 +47,16 @@ body {
   font-size: 1.1rem;
   border: 1.5px solid #aa2222;
   border-radius: 12px;
-  background-color: #330000;
-  color: #fff;
-  box-shadow: 0 0 6px #ff5050;
+  background-color: #3b0000;
+  color: #ffffff;
+  box-shadow: 0 0 6px #ff5252;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .header__search:focus {
   outline: none;
-  border-color: #ff5050;
-  box-shadow: 0 0 12px #ff5050;
+  border-color: #ff5252;
+  box-shadow: 0 0 12px #ff5252;
 }
 
 
@@ -79,7 +79,7 @@ body {
 }
 
 .card {
-  background: linear-gradient(145deg, #1b1b1b, #2a2a2a);
+  background: linear-gradient(145deg, #222222, #2b2a2a);
   border: 1px solid #333;
   border-radius: 1.2rem;
   padding: 1.2rem;
@@ -90,11 +90,6 @@ body {
   align-items: center;
   text-align: center;
   backdrop-filter: blur(4px);
-}
-
-.card:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 0 25px rgba(255, 80, 80, 0.4), inset 0 0 10px #222;
 }
 
 .card img {
@@ -132,12 +127,6 @@ body {
   box-shadow: 0 0 8px rgba(255, 80, 80, 0.5);
 }
 
-.card a:hover {
-  background: linear-gradient(to right, #ff2e2e, #cc0000);
-  transform: scale(1.05);
-}
-
-
 .footer {
   background: linear-gradient(135deg, #1a1a1a, #111111);
   color: #bbb;
@@ -164,18 +153,6 @@ body {
   transition: color 0.3s ease;
 }
 
-.footer a:hover,
-.footer a:focus {
-  color: #ff7b7b;
-  text-decoration: underline;
-}
-
-
-.footer:hover {
-  color: #e06767;
-}
-
-
 .metal-finder-title {
   font-size: 3rem;
   font-weight: 900;
@@ -188,4 +165,97 @@ body {
     0 0 20px #ff1a1a,
     0 0 30px #b22222,
     0 0 40px #800000;
+}
+
+.load-more-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff5050;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #1f1f1f;
+  color: #eee;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 300px;
+  box-shadow: 0 0 10px #ff5050;
+  text-align: center;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal button {
+  margin-top: 1rem;
+  background: #ff5050;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.modal a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #fffbfb;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+ /* -------------------------------------------*/
+
+.modal a:hover {
+  color: #ff2e2e;
+  text-decoration: underline;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 0 25px rgba(255, 80, 80, 0.4), inset 0 0 10px #222;
+}
+
+.card a:hover {
+  background: linear-gradient(to right, #ff2e2e, #cc0000);
+  transform: scale(1.05);
+}
+
+.footer a:hover,
+.footer a:focus {
+  color: #ff7b7b;
+  text-decoration: underline;
+}
+
+.footer:hover {
+  color: #e06767;
+}
+
+.load-more-button:hover {
+  background-color: #ff2e2e;
+}
+
+.modal button:hover {
+  background: #e04040;
 }
