@@ -13,28 +13,34 @@ function Main() {
 
   useEffect(() => {
     async function fetchTop() {
-      const url = "https://itunes.apple.com/search?term=metal&entity=song&limit=200"; // больше 200 нельзя(
+      const url = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=metal&limit=200&api_key=4981c2f2e46f594d150e238103c0b5f9&format=json`;
+  
       const data = await getApiData(url);
-
-      if (!data) {setTopTracks([{
-        trackName: `Я запрещаю вам слушать музыку`,
-        artistName: "",
-        artworkUrl100: "",
-        trackViewUrl: "#"
-      }]);
-      return;};
-
-      const results: Track[] = data.results.map((track: any) => ({
-        trackId: track.trackId,
-        trackName: track.trackName,
-        artistName: track.artistName,
-        artworkUrl100: track.artworkUrl100,
-        trackViewUrl: track.trackViewUrl,
+  
+      if (!data || !data.tracks || !data.tracks.track) {
+        setTopTracks([
+          {
+            trackId: -1,
+            trackName: `Я запрещаю вам слушать музыку`,
+            artistName: "",
+            artworkUrl100: "",
+            trackViewUrl: "#",
+          },
+        ]);
+        return;
+      }
+  
+      const results: Track[] = data.tracks.track.map((track: any, index: number) => ({
+        trackId: index,
+        trackName: track.name,
+        artistName: track.artist.name,
+        artworkUrl100: track.image?.find((img: any) => img.size === "medium")?.["#text"] || "",
+        trackViewUrl: track.url,
       }));
-
+  
       setTopTracks(results);
     }
-
+  
     fetchTop();
   }, []);
 
@@ -48,7 +54,7 @@ function Main() {
   return (
     <main className="content">
       <h2 className="name">
-        {isSearch ? "Результаты поиска:" : "Топ треков (по мнению itunes):"}
+        {isSearch ? "Результаты поиска:" : "Топ треков (по мнению уже не itunes):"}
       </h2>
       <div className="artist_content">
         {tracksToShow.map((track) => (
