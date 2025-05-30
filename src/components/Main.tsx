@@ -16,7 +16,13 @@ function Main() {
       const url = "https://itunes.apple.com/search?term=metal&entity=song&limit=200"; // больше 200 нельзя(
       const data = await getApiData(url);
 
-      if (!data) return;
+      if (!data) {setTopTracks([{
+        trackName: `Я запрещаю вам слушать музыку`,
+        artistName: "",
+        artworkUrl100: "",
+        trackViewUrl: "#"
+      }]);
+      return;};
 
       const results: Track[] = data.results.map((track: any) => ({
         trackId: track.trackId,
