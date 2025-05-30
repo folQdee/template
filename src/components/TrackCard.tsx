@@ -8,8 +8,8 @@ function TrackCard({ data }: { data: Track }) {
   const [showModal, setShowModal] = useState(false);
 
   async function fetchArtistInfo(name: string) {
-    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(name)}&entity=musicArtist&limit=1`;
-    const data = await getApiData(url);
+    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(name)}&api_key=4981c2f2e46f594d150e238103c0b5f9&format=json`;
+        const data = await getApiData(url);
     if (data?.results?.[0]) {
       setArtistData(data.results[0]);
       setShowModal(true);

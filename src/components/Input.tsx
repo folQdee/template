@@ -13,24 +13,27 @@ function Input() {
       setSearchData([]);
       return;
     }
-
-    const searchUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(
-      value
-    )}&entity=song&limit=20`;
-
+  
+    const apiKey = '4981c2f2e46f594d150e238103c0b5f9';
+    const searchUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&track=${encodeURIComponent(value)}&limit=20&api_key=${apiKey}&format=json`;
+  
     const data = await getApiData(searchUrl);
-    if (!data) return;
-
-    const results: Track[] = data.results.map((track: any) => ({
-      trackId: track.trackId,
-      trackName: track.trackName,
-      artistName: track.artistName,
-      artworkUrl100: track.artworkUrl100,
-      trackViewUrl: track.trackViewUrl,
+    if (!data || !data.results?.trackmatches?.track) {
+      setSearchData([]);
+      return;
+    }
+  
+    const results: Track[] = data.results.trackmatches.track.map((track: any, index: number) => ({
+      trackId: index, // Last.fm не даёт уникальный ID
+      trackName: track.name,
+      artistName: track.artist,
+      artworkUrl100: track.image?.find((img: any) => img.size === "medium")?.["#text"] || "",
+      trackViewUrl: track.url,
     }));
-
+  
     setSearchData(results);
   }
+  
 
   return (
     <input
