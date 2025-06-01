@@ -1,23 +1,22 @@
-import React from 'react';
+import React from "react";
+import Input from "./components/Input";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
+import { MainProvider } from "./context";
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+function App() {
+  return (
+    <MainProvider>
+      <div className="wrapper">
+        <header className="header">
+          <h1 className="metal-finder-title">Blackened Sound</h1>
+          <Input />
+        </header>
+        <Main />
+        <Footer />  {}
+      </div>
+    </MainProvider>
+  );
+}
 
-// export default App;
+export default App;
