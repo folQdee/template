@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import ArtistModal from "./ArtistModal";
 import { Track } from "./types";
 import { getApiData } from "./getApiData";
+import { API_KEY, BASE_API_URL } from "../constants";
+
 
 function TrackCard({ data }: { data: Track }) {
   const [artistData, setArtistData] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
   async function fetchArtistInfo(name: string) {
-    const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(name)}&api_key=4981c2f2e46f594d150e238103c0b5f9&format=json`;
+    const url = `${BASE_API_URL}?method=artist.getinfo&artist=${encodeURIComponent(name)}&api_key=${API_KEY}&format=json`;
         const data = await getApiData(url);
     if (data?.results?.[0]) {
       setArtistData(data.results[0]);

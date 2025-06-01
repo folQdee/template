@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { MainContext } from "../context";
 import { getApiData } from "./getApiData";
 import { Track } from "./types";
+import { API_KEY, BASE_API_URL } from "../constants";
+
 
 
 function Input() {
@@ -15,7 +17,7 @@ function Input() {
     }
   
     const apiKey = '4981c2f2e46f594d150e238103c0b5f9';
-    const searchUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&track=${encodeURIComponent(value)}&limit=20&api_key=${apiKey}&format=json`;
+    const searchUrl = `${BASE_API_URL}?method=track.search&track=${encodeURIComponent(value)}&limit=20&api_key=${API_KEY}&format=json`;
   
     const data = await getApiData(searchUrl);
     if (!data || !data.results?.trackmatches?.track) {

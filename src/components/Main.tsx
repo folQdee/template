@@ -3,6 +3,8 @@ import { MainContext } from "../context";
 import { getApiData } from "./getApiData";
 import TrackCard from "./TrackCard";
 import { Track } from "./types";
+import { API_KEY, BASE_API_URL } from "../constants";
+
 
 const TRACKS_PER_LOAD = 7;
 
@@ -13,7 +15,7 @@ function Main() {
 
   useEffect(() => {
     async function fetchTop() {
-      const url = `https://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=metal&limit=200&api_key=4981c2f2e46f594d150e238103c0b5f9&format=json`;
+      const url = `${BASE_API_URL}?method=tag.gettoptracks&tag=metal&limit=200&api_key=${API_KEY}&format=json`;
   
       const data = await getApiData(url);
   
